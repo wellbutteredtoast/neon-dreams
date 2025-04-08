@@ -22,3 +22,5 @@ to whatever item its parsing. As of now, there is no real limit to how many
 attrs an item can have, and you can even make conflicting attributes. But at
 the end of the day, it's a fairly basic system. Further down in this document
 you can find a master list of all attributes (AKA: once things are finalized).
+
+#### ATTRIBUTES MASTER ####
