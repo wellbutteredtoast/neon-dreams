@@ -1,0 +1,24 @@
+#### ITEMS ####
+Items are objects the player interacts with. Fairly standard stuff. All items
+exist as lightly secured JSON files with the *.item extension. For simplicity,
+all items follow the following simple schema;
+
+{
+    "item_id": {
+        "name": "",
+        "desc": "",
+        "type": "",
+        "attributes": [
+            ...
+        ]
+    }
+}
+
+Everything is pretty easy to gather, each item has a unique ID, a name, a very
+interesting description, what item type it is, and then the one that needs more
+explaining, 'attributes'. Attributes are just plain text strings of words and
+stuff that the game understands, and will apply any and all attrs it can find
+to whatever item its parsing. As of now, there is no real limit to how many
+attrs an item can have, and you can even make conflicting attributes. But at
+the end of the day, it's a fairly basic system. Further down in this document
+you can find a master list of all attributes (AKA: once things are finalized).

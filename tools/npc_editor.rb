@@ -6,7 +6,7 @@
 #
 
 def main()
-  puts '%%% NPCEditor for NeonDreams %%'
+  puts '%%% NPCEditor for NeonDreams %%%'
 end
 
 main()
