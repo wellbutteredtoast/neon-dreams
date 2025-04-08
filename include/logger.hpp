@@ -1,5 +1,5 @@
-#ifndef LOGGER_H
-#define LOGGER_H
+#ifndef LOGGER_HPP
+#define LOGGER_HPP
 
 #include <stdio.h>
 #include <time.h>
@@ -100,4 +100,4 @@ void nd_critical(const char* content[]) {
     printf("\n");
 }
 
-#endif // logger.h
+#endif // logger.hpp

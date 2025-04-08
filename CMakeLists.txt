@@ -13,6 +13,7 @@ add_compile_options(
     -O2
     -flto
     -funroll-loops
+    -ffast-math
 )
 
 # Unix & not Apple => Linux
