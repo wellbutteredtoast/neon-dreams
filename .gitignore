@@ -1,3 +1,5 @@
 /.vscode/
 external/
 build/
+tools/npc
+tools/items

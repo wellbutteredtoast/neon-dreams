@@ -61,7 +61,8 @@ bool is_secure_item_json_valid(const std::string absolute_path) {
     for (auto& [item_id, item_info] : json_data.items()) {
         if (!item_info.is_object()) return false;
 
-        const std::vector<std::string> required_fields = { "name", "desc", "type", "attributes" };
+        const std::vector<std::string> required_fields = { "name", "desc", \
+                                                        "type", "attributes" };
         for (const auto& field : required_fields) {
             if (!item_info.contains(field) || !item_info[field].is_string()) {
                 return false;
