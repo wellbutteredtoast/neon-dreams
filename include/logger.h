@@ -5,6 +5,8 @@
 #include <time.h>
 #include <stdlib.h>
 
+// NOTE: This is not very efficient, these can probably be
+//       improved on later, but it's late and this just works.
 
 static char* get_current_time() {
     // HH:MM:SS + \0
@@ -44,8 +46,54 @@ static void write_to_file(FILE* file) {
 
 }
 
+// Verbose and debugging messages.
+// Usually for debug builds or crash dumps.
 void nd_system(const char* content[]) {
-    // ...
+    printf("[%d - %d] [SYSTEM] ", get_current_date(), get_current_time());
+    for (int i = 0; content[i] != NULL; i++) {
+        printf("%s", content[i]);
+    }
+    printf("\n");
+}
+
+// Information and general messages.
+// The standard for logging things.
+void nd_info(const char* content[]) {
+    printf("[%s %s] [INFO] ", get_current_date(), get_current_time());
+    for (int i = 0; content[i] != NULL; i++) {
+        printf("%s", content[i]);
+    }
+    printf("\n");
+}
+
+// Things are not very stable.
+// But there's nothing stopping execution yet.
+void nd_warning(const char* content[]) {
+    printf("[%s %s] [WARNING] ", get_current_date(), get_current_time());
+    for (int i = 0; content[i] != NULL; i++) {
+        printf("%s", content[i]);
+    }
+    printf("\n");
+}
+
+// Something has happened, and execution almost stopped.
+// But errors are usually handled with grace.
+void nd_error(const char* content[]) {
+    printf("[%s %s] [ERROR] ", get_current_date(), get_current_time());
+    for (int i = 0; content[i] != NULL; i++) {
+        printf("%s", content[i]);
+    }
+    printf("\n");
+}
+
+// An error that cannot be recovered from happened!
+// Only use when logging a crash state situation.
+void nd_critical(const char* content[]) {
+    printf("[%s %s] [CRITICAL] ", get_current_date(), get_current_time());
+    for (int i = 0; content[i] != NULL; i++) {
+        printf("%s", content[i]);
+    }
+    printf("\n");
 }
 
 #endif // logger.h

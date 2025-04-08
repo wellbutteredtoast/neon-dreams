@@ -10,7 +10,7 @@
 # .sum files are not included in release builds.
 
 def main()
-  puts '%%% NPCPacker for NeonDreams %%'
+  puts '%%% NPCPacker for NeonDreams %%%'
 end
 
 main()

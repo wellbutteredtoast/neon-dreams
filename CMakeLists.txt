@@ -12,15 +12,49 @@ add_compile_options(
     -funroll-loops
 )
 
-# System-wide includes
-include_directories(
-    /usr/include
-    /usr/include/SDL2
-    /usr/include/nlohmann
-    ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/external/imgui
-    ${CMAKE_SOURCE_DIR}/external/imgui/backends
-)
+# Unix & not Apple => Linux
+if(UNIX AND NOT APPLE)
+    message(STATUS "Configuring for Linux...")
+    include_directories(
+        /usr/include
+        /usr/include/SDL2
+        /usr/include/nlohmann
+        ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/external/imgui
+        ${CMAKE_SOURCE_DIR}/external/imgui/backends
+    )
+
+    set(SYSTEM_LIBS
+        SDL2
+        SDL2_image
+        SDL2_ttf
+        SDL2_mixer
+        GL
+    )
+
+# MacOS for Apple Silicon
+# Intel Macs are not in support right now
+elseif(APPLE)
+    message(STATUS "Configuring for macOS")
+    include_directories(
+        /opt/homebrew/include
+        /opt/homebrew/include/SDL2
+        /opt/homebrew/include/nlohmann
+        ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/external/imgui
+        ${CMAKE_SOURCE_DIR}/external/imgui/backends
+    )
+
+    link_directories(/opt/homebrew/lib)
+
+    set(SYSTEM_LIBS
+        SDL2
+        SDL2_image
+        SDL2_ttf
+        SDL2_mixer
+        "-framework OpenGL"
+    )
+endif()
 
 # MRuby includes
 include_directories(${CMAKE_SOURCE_DIR}/external/mruby/include)
@@ -36,7 +70,7 @@ file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS
     ${CMAKE_SOURCE_DIR}/include/*.h
 )
 
-# ImGui files
+# ImGui sources
 set(IMGUI_SOURCES
     external/imgui/imgui.cpp
     external/imgui/imgui_draw.cpp
@@ -48,20 +82,16 @@ set(IMGUI_SOURCES
 # Executable
 add_executable(NeonDreams ${SOURCES} ${HEADERS} ${IMGUI_SOURCES})
 
-# Link system + mruby
+# Link system libs + MRuby static lib
 target_link_libraries(NeonDreams
-    SDL2
-    SDL2_image
-    SDL2_ttf
-    SDL2_mixer
-    GL
-    m
+    ${SYSTEM_LIBS}
     ${CMAKE_SOURCE_DIR}/external/mruby/build/host/lib/libmruby.a
 )
 
-# Output location
+# Output directory
 set_target_properties(NeonDreams PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
 message(STATUS "NeonDreams configured with SDL2 + OpenGL + ImGui + JSON + MRuby")
+message(STATUS "Remember to compile mruby before running!")
