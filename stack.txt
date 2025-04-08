@@ -1,0 +1,68 @@
+#### CORE DETAILS ####
+Language: C++ (Core) | Ruby (Scripting)
+Renderer: SDL
+ScriptRT: MRuby
+DataFmts: JSON (items, npcs, quests)
+          YAML (save data)
+          TEXT (logging, dumps, etc)
+
+BuildSys: CMake
+AudioSys: SDL_Mixer
+DbgTools: CLI tools + ImGui tools
+Modding?: Ruby!
+
+#### TOOLS ####
+Item Editor:        CLI
+NPC Editor:         CLI
+Debug Save Creator: CLI
+Save Editor:        CLI
+Map Editor:         GUI
+Quest Editor:       CLI
+Item Packager:      CLI
+NPC Packager:       CLI
+Save Validator:     CLI
+
+#### CUSTOM FILE ASSOCS ####
+Map Files:      *._scene
+Save Files:     *.save
+Backup Save:    *.save.backup
+Save Checksum:  *.save.key
+Backup Key:     *.save.backup.key
+
+* 'key' == SHA512 checksum
+*       == or MD5
+
+#### LOG LEVELS ####
+[SYSTEM]:   >> Verbose logs, usually in debug builds.
+[INFO]:     >> Typical surface-level stuff.
+[WARNING]:  >> Somethings wrong, but nothing bad.
+[ERROR]:    >> Bad things, but no crashes yet.
+[CRITICAL]: >> And *now* things are crashing.
+
+#### JSON ####
+All things written in JSON will be stored in very lightly
+encrypted JSON, XOR with a small key that's easy to find.
+
+This means all item and NPC data will be packaged into JSON,
+and then the JSON will get XOR'd and have a key produced for
+later validation.
+
+#### YAML ####
+The same above applies to YAML, the data will be XOR'd with
+a fairly typical key, but also checksum'd afterwards to ensure
+validity.
+
+#### VERSION CONTROLS ####
+Git, long live GitHub! All game code and assets are in a private
+GitHub repo, where also all issues will be documented for the
+sake of archiving.
+
+#### DEPENDENCIES ####
+SDL3            'sudo apt-get install libsdl2-dev -y'
+SDL3_ttf        'sudo apt-get install libsdl2-ttf-dev -y'
+SDL3_mixer      'sudo apt-get install libsdl2-mixer-dev -y'
+SDL3_image      'sudo apt-get install libsdl2-image-dev -y'
+nlohmann::json  'sudo apt-get install nlohmann-json3-dev -y'
+OpenGL          'sudo apt install libgl1-mesa-dev -y'
+ImGui           'git clone https://github.com/ocornut/imgui --depth 1'
+MRuby           'git clone https://github.com/mruby/mruby --depth 1'
