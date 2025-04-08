@@ -1,8 +1,7 @@
 # item_packager.rb
 #
-# This file takes an item JSON, secures it with a SHA512
-# checksum, then secures it with XOR. Both the resulting
-# XOR'd file and the key are dumped to two files.
+# This file takes an item JSON, and generates a SHA512 checksum before
+# encrypting the original plain-text JSON with a known XOR key.
 #
 # *.item -> XOR Secure Item JSON Data
 # *.sum -> SHA512 Checksum
@@ -24,7 +23,6 @@ def xor_data(data, key_bytes)
   end.join
 end
 
-# Convert a hex string (e.g., 0x5F0F) to a byte array
 def hex_string_to_bytes(hex_str)
   hex_str = hex_str.sub(/^0x/i, '')
   [hex_str].pack('H*').bytes

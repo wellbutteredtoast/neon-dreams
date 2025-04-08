@@ -30,6 +30,8 @@ def collect_attributes
   puts "Enter attributes one at a time. Type '!' to finish:"
   attributes = []
 
+  # this lets you put technically infinite attributes to an items
+  # this should probably be capped later...
   loop do
     print "  Attribute: "
     input = gets.chomp

@@ -3,6 +3,9 @@ project(NeonDreams)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_STANDARD 17)
 
+# TODO: Windows implementation
+# TODO: Remove hard-coded paths like `/usr/include` or `/opt/homebrew/include`
+
 # Compiler flags
 add_compile_options(
     -Wall
@@ -93,5 +96,5 @@ set_target_properties(NeonDreams PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
-message(STATUS "NeonDreams configured with SDL2 + OpenGL + ImGui + JSON + MRuby")
+message(STATUS "NeonDreams has been compiled with all dependencies.")
 message(STATUS "Remember to compile mruby before running!")

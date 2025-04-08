@@ -46,6 +46,10 @@ static void write_to_file(FILE* file) {
 
 }
 
+static void close_existing_file(FILE* file) {
+    
+}
+
 // Verbose and debugging messages.
 // Usually for debug builds or crash dumps.
 void nd_system(const char* content[]) {
